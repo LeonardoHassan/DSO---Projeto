@@ -1,9 +1,9 @@
 class TipoCombustivel:
 
     def __init__(self, tipo: str, preco_litro: float, id_tipo: int):
-        self.__tipo: tipo
-        self.__preco_litro: preco_litro
-        self.__id_tipo: id_tipo   
+        self.__tipo = tipo
+        self.__preco_litro = preco_litro
+        self.__id_tipo = id_tipo   
 
     @property
     def tipo(self):
@@ -20,4 +20,9 @@ class TipoCombustivel:
     @property
     def id_tipo(self):
       return self.__id_tipo
+
+
+gasolina = TipoCombustivel('Gasolina', 5.00, 1)
+diesel = TipoCombustivel('Diesel', 4.25, 2)
+etanol = TipoCombustivel('Etanol', 3.50, 3)
 

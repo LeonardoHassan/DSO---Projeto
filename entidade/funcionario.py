@@ -1,11 +1,11 @@
 from entidade.pessoa import Pessoa
 
-class funcionario(Pessoa):
+class Funcionario(Pessoa):
   
   def __init__(self, nome: str, cpf: int, cargo: str, salario: int):
       super().__init__(nome, cpf)
-      self.__cargo: cargo
-      self.__salario: salario
+      self.__cargo = cargo
+      self.__salario = salario
 
   @property
   def cargo(self):

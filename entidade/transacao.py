@@ -4,10 +4,10 @@ from entidade.cliente import Cliente
 class Transacao:
     def __init__(self, cliente: Cliente, id: int, tipo: str, valor: float):
         if isinstance(cliente, Cliente):
-            self.__cliente: cliente
-        self.__id: id
-        self.__tipo: tipo
-        self.__valor: valor
+            self.__cliente = cliente
+        self.__id = id
+        self.__tipo = tipo
+        self.__valor = valor
         
     @property
     def cliente(self):
