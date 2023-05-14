@@ -4,6 +4,7 @@ from entidade.bomba import Bomba
 from entidade.produtos import Produtos, lista_produtos
 from controle.controlador_bomba import ControladorBomba
 from entidade.transacao import Transacao
+from exception import ExceptionTeste
 
 class ControladorTransacao:
     def __init__(self, controlador_sistema):
@@ -22,7 +23,8 @@ class ControladorTransacao:
         for cliente in lista_cliente:
             if (cliente.cpf == dados["cliente"]):
                 dados["cliente"] = cliente    
-
+            else:
+                dados["cliente"] = None
         while not dados["cliente"]:
             self.__tela_transacao.mostra_mensagem("Cliente não existente.")
             for cliente in lista_cliente:
@@ -31,8 +33,12 @@ class ControladorTransacao:
             for cliente in lista_cliente:
                 if (cliente.cpf == dados["cliente"]):
                     dados["cliente"] = cliente
-
-        id = int(len(self.__transacoes)+1)
+                else:
+                    dados["cliente"] = None
+        if len(self.__transacoes) == 0:
+            id = 1
+        else:
+            id = int(self.__transacoes[len(self.__transacoes)-1].id +1)
  
         if dados["tipo"] == 1:
             dados["tipo"] = "Combustível"
@@ -62,11 +68,13 @@ class ControladorTransacao:
 
             dados["tipo"] = "Produto"
             for produto in lista_produtos:
-                self.__tela_transacao.mostra_mensagem("----------------\nNome do produto: {}\nID: {}`\nPreço: {}\nQuantidade: {}".format(produto.nome,produto.id,produto.preco,produto.quantidade))
+                self.__tela_transacao.mostra_mensagem("----------------\nNome do produto: {}\nID: {}\nPreço: {}\nQuantidade: {}".format(produto.nome,produto.id,produto.preco,produto.quantidade))
             dados_produto = self.__tela_transacao.transacao_produto()
             for produto in lista_produtos:
                 if (produto.id == dados_produto["produto"]):
                     dados_produto["produto"] = produto
+                else:
+                    dados_produto["produto"] = None
 
             while not dados_produto["produto"]:
                 self.__tela_transacao.mostra_mensagem("Produto não existente.")
@@ -76,6 +84,8 @@ class ControladorTransacao:
                 for produto in lista_produtos:
                     if (produto.id == dados_produto["produto"]):
                         dados_produto["produto"] = produto
+                    else:
+                        dados_produto["produto"] = None
 
             valor_total = (dados_produto["produto"].preco) * (dados_produto["quantidade"])
             transacao = Transacao(dados["cliente"], id, dados["tipo"],
@@ -98,7 +108,7 @@ class ControladorTransacao:
             self.__transacoes.remove(transacao)
             self.lista_transacoes()
         else:
-            self.__tela_transacao.mostra_mensagem("-------------\nATENÇÃO: Transação não existente")
+            raise ExceptionTeste("---------------\nTRANSAÇÃO NÃO EXISTENTE")
 
     def seleciona_transacao(self, numero: int):
         for transacao in self.__transacoes:
@@ -110,23 +120,19 @@ class ControladorTransacao:
         total = 0
         for transacao in self.__transacoes:
             total += transacao.valor
-        return total
+        self.__tela_transacao.mostra_mensagem(("---------------\nTOTAL VENDIDO: R$ {}".format(total)))
     
     def retornar(self):
         self.__controlador_sistema.abre_tela()
 
 
 
-            
-
-
-
-
-
-
     def abre_tela(self):
-        lista_opcoes = {1: self.fazer_transacao, 2: self.lista_transacoes, 3: self.excluir_transacao, 4: self.total_vendido, 0: self.retornar}
+        try:
+            lista_opcoes = {1: self.fazer_transacao, 2: self.lista_transacoes, 3: self.excluir_transacao, 4: self.total_vendido, 0: self.retornar}
 
-        continua = True
-        while continua:
-            lista_opcoes[self.__tela_transacao.tela_opcoes()]()
+            continua = True
+            while continua:
+                lista_opcoes[self.__tela_transacao.tela_opcoes()]()
+        except ExceptionTeste as e:
+            self.__tela_transacao.mostra_mensagem(e.mensagem)

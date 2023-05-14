@@ -9,7 +9,7 @@ class TelaTransacao:
         print("4 - Total vendido do posto")
         print("0 - Retornar")
         opcao = input("Escolha a opcao: ")
-        while not (opcao.isdigit()) and int(opcao) not in [1,2,3,4,0]:
+        while not (opcao.isdigit()) or int(opcao) not in [1,2,3,4,0]:
             print("DIGITE UM VALOR VÁLIDO (1, 2, 3, 4, 5, 0)")
             opcao = input("Escolha a opcao: ")
         return int(opcao)
@@ -24,7 +24,7 @@ class TelaTransacao:
 
         print("-----------------------\n1 - Combustível\n2 - Produto")
         tipo = input("-----------------------\nSelecione o tipo de transação: ")
-        while not (tipo.isdigit()) and int(tipo) not in [1,2]:
+        while not (tipo.isdigit()) or int(tipo) not in [1,2]:
             print("DIGITE UM VALOR VÁLIDO (1 ou 2).")
             print("-----------------------\n1 - Combustível\n2 - Produto")
             tipo = input("-----------------------\nSelecione o tipo de transação: ")
@@ -60,10 +60,11 @@ class TelaTransacao:
         return {"bomba": int(bomba), "litros": int(litros)}
 
     def mostra_transacao(self, dados_transacao):
-        print("CLIENTE: ", dados_transacao["cliente"])
-        print("ID: ", dados_transacao["id"])
-        print("TIPO: ", dados_transacao["tipo"])
-        print("DESCRIÇÃO: ", dados_transacao["descricao"])
+        print("--------------------------------")
+        print("CLIENTE:", dados_transacao["cliente"])
+        print("ID:", dados_transacao["id"])
+        print("TIPO:", dados_transacao["tipo"])
+        print("DESCRIÇÃO:", dados_transacao["descricao"])
         print("VALOR: R$", dados_transacao["valor"])
         print("\n")
     

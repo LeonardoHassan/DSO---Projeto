@@ -1,7 +1,7 @@
 class TelaBomba:
     
     def tela_opcoes(self):
-        print("-------- AMIGOS ----------")
+        print("-------- BOMBAS ----------")
         print("Escolha a opcao")
         print("1 - Incluir Bomba")
         print("2 - Alterar Bomba")
@@ -10,7 +10,7 @@ class TelaBomba:
         print("5 - Litros Vendidos")
         print("0 - Retornar")
         opcao = input("Escolha a opcao: ")
-        while not (opcao.isdigit()) and int(opcao) not in [1,2,3,4,5,0]:
+        while not (opcao.isdigit()) or int(opcao) not in [1,2,3,4,5,0]:
             print("DIGITE UM VALOR VÁLIDO (1,2,3,4,5,0)")
             opcao = input("Escolha a opcao: ")
         return int(opcao)
@@ -22,7 +22,7 @@ class TelaBomba:
             print("DIGITE UM NUMERO VÁLIDO")
             numero_bomba = input("Numero: ")
         tipo_combustivel = (input("-----------------------\nGasolina - 1\nDiesel - 2\nEtanol -3\n-----------------------\nTipo de combustivel: "))
-        while not (tipo_combustivel.isdigit()) and int(tipo_combustivel) not in [1,2,3]:
+        while not (tipo_combustivel.isdigit()) or int(tipo_combustivel) not in [1,2,3]:
             print("DIGITE UM VALOR VÁLIDO (1,2,3)")
             tipo_combustivel = (input("-----------------------\nGasolina - 1\nDiesel - 2\nEtanol -3\n-----------------------\nTipo de combustivel: "))
         capacidade = input("Capacidade da bomba (em litros): ")
