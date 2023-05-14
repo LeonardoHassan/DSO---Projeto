@@ -32,3 +32,13 @@ class Produtos:
     @quantidade.setter
     def quantidade(self, quantidade):
         self.__quantidade = quantidade        
+
+    
+
+produto1 = Produtos("Bala", 1.00, 1, 10)
+produto2 = Produtos("Cigarro", 10.25, 2, 15)
+produto3 = Produtos("Cachaça", 25.00, 3, 5)
+produto4 = Produtos("Chocolate", 6.75, 4, 8)
+produto5 = Produtos("Energético", 15.50, 5, 30)
+
+lista_produtos = [produto1,produto2,produto3,produto4,produto5]

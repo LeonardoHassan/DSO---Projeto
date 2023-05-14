@@ -2,11 +2,12 @@
 from entidade.cliente import Cliente
 
 class Transacao:
-    def __init__(self, cliente: Cliente, id: int, tipo: str, valor: float):
+    def __init__(self, cliente: Cliente, id: int, tipo: str, descricao: str, valor: float):
         if isinstance(cliente, Cliente):
             self.__cliente = cliente
         self.__id = id
         self.__tipo = tipo
+        self.__descricao = descricao
         self.__valor = valor
         
     @property
@@ -39,4 +40,12 @@ class Transacao:
 
     @valor.setter
     def valor(self, valor):
-        self.__valor = valor        
+        self.__valor = valor
+
+    @property
+    def descricao(self):
+        return self.__descricao
+
+    @descricao.setter
+    def descricao(self, descricao):
+        self.__descricao = descricao      

@@ -31,3 +31,8 @@ class Bomba:
   @property
   def total_vendido(self):
     return self.__total_vendido
+  
+  @total_vendido.setter
+  def total_vendido(self, total_vendido):
+    self.__total_vendido = total_vendido
+

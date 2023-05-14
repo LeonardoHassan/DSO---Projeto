@@ -13,6 +13,9 @@ class ControladorSistema:
         self.__controlador_transacao = ControladorTransacao(self)
         self.__tela_sistema = TelaSistema()
     
+    @property
+    def controlador_bomba(self):
+        return self.__controlador_bomba
 
     def inicializa_sistema(self):
         self.abre_tela()

@@ -18,3 +18,4 @@ class Pessoa():
     @cpf.setter
     def cpf(self, cpf):
         self.__cpf = cpf
+
