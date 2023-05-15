@@ -8,7 +8,7 @@ class ControladorProdutos:
         self.__controlador_sistema = controlador_sistema
 
     def abre_tela(self):
-        print("Não era minha parte do trabalho")
+        print("-----------------\nNão era minha parte do trabalho")
         self.retornar
 
     def retornar(self):

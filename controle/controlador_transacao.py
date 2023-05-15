@@ -20,21 +20,29 @@ class ControladorTransacao:
         for cliente in lista_cliente:
             print("----------------\nNome do cliente: {}\nCPF: {}".format(cliente.nome,cliente.cpf))
         dados = self.__tela_transacao.pega_tipo_transacao()
+        x = 0
         for cliente in lista_cliente:
             if (cliente.cpf == dados["cliente"]):
-                dados["cliente"] = cliente    
-            else:
-                dados["cliente"] = None
-        while not dados["cliente"]:
+                dados["cliente"] = cliente
+                x = 1  
+                break  
+        if x == 0:
+            dados["cliente"] = None
+
+        while dados["cliente"] is None:
+            x = 0
             self.__tela_transacao.mostra_mensagem("Cliente não existente.")
             for cliente in lista_cliente:
                 print("----------------\nNome do cliente: {}\nCPF: {}".format(cliente.nome,cliente.cpf))
             dados = self.__tela_transacao.pega_tipo_transacao()
             for cliente in lista_cliente:
-                if (cliente.cpf == dados["cliente"]):
+                if cliente.cpf == dados["cliente"]:
                     dados["cliente"] = cliente
-                else:
-                    dados["cliente"] = None
+                    x = 1
+                    break 
+            if x == 0:
+                dados["cliente"] = None
+                    
         if len(self.__transacoes) == 0:
             id = 1
         else:
@@ -70,22 +78,28 @@ class ControladorTransacao:
             for produto in lista_produtos:
                 self.__tela_transacao.mostra_mensagem("----------------\nNome do produto: {}\nID: {}\nPreço: {}\nQuantidade: {}".format(produto.nome,produto.id,produto.preco,produto.quantidade))
             dados_produto = self.__tela_transacao.transacao_produto()
+            x = 0
             for produto in lista_produtos:
-                if (produto.id == dados_produto["produto"]):
+                if produto.id == dados_produto["produto"]:
                     dados_produto["produto"] = produto
-                else:
-                    dados_produto["produto"] = None
+                    x = 1
+                    break
+            if x == 0:
+                dados_produto["produto"] = None
 
-            while not dados_produto["produto"]:
+            while dados_produto["produto"] is None:
+                x = 0
                 self.__tela_transacao.mostra_mensagem("Produto não existente.")
                 for produto in lista_produtos:
-                    self.__tela_transacao.mostra_mensagem("----------------\nNome do produto: {}\nID: {}`\nPreço: {}\nQuantidade: {}".format(produto.nome,produto.id,produto.preco,produto.quantidade))
-                    dados_produto = self.__tela_transacao.transacao_produto()
+                    self.__tela_transacao.mostra_mensagem("----------------\nNome do produto: {}\nID: {}\nPreço: {}\nQuantidade: {}".format(produto.nome,produto.id,produto.preco,produto.quantidade))
+                dados_produto = self.__tela_transacao.transacao_produto()
                 for produto in lista_produtos:
-                    if (produto.id == dados_produto["produto"]):
+                    if produto.id == dados_produto["produto"]:
                         dados_produto["produto"] = produto
-                    else:
-                        dados_produto["produto"] = None
+                        x = 1
+                        break
+                if x == 0:
+                    dados_produto["produto"] = None
 
             valor_total = (dados_produto["produto"].preco) * (dados_produto["quantidade"])
             transacao = Transacao(dados["cliente"], id, dados["tipo"],

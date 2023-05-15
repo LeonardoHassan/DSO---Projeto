@@ -17,7 +17,7 @@ class Cliente(Pessoa):
 cliente1 = Cliente("Joao", 1, 0 )
 cliente2 = Cliente("Carlos", 2, 0)
 cliente3 = Cliente("Pedro Sell", 3, 0)
-cliente4 = Cliente("Marcos", 4, 0)
+cliente4 = Cliente("Marcos Laureano", 4, 0)
 cliente5 = Cliente("Felipe", 5, 0)
 
 lista_cliente = [cliente1,cliente2,cliente3,cliente4,cliente5]
